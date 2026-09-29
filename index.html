@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="sr-Latn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>She Made creative studio — kutije i slike za dečije sobe</title><meta name="description" content="Ručno pravljene i oslikane kutije za igračke i uspomene, gajbice, slike i kocke sa imenom, u ekološkim bojama.">
+<link rel="icon" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet"><style>
+:root{--teal:#88b1b3;--teal-d:#4d7f82;--teal-dd:#2f5558;--teal-l:#dfeceb;--rose:#d9a5a1;--rose-d:#b9706c;--rose-l:#f6e6e3;--cream:#fbf7f1;--ink:#26383a;--muted:#6b7e80;--line:#e3ddd2;--r:20px;--sh:0 12px 32px -14px rgba(38,56,58,.3)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Jost",system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:1.05;color:var(--teal-dd)}
+.script{font-family:"Pinyon Script",cursive;font-weight:400;color:var(--rose-d)}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-d);font-weight:500}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;padding:15px 30px;border-radius:999px;font-weight:500;font-size:15px;letter-spacing:.03em;border:1.5px solid var(--teal-dd);transition:.18s}
+.btn-dark{background:var(--teal-dd);color:#fff}.btn-dark:hover{background:var(--teal-d);border-color:var(--teal-d);transform:translateY(-2px)}
+.btn-ghost{color:var(--teal-dd)}.btn-ghost:hover{background:var(--teal-dd);color:#fff}
+.announce{background:var(--teal);color:#fff;font-size:13px;text-align:center;padding:9px 16px;letter-spacing:.06em}
+header.site{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+.logo{display:flex;align-items:center;gap:12px;font-family:"Cormorant Garamond",serif;font-weight:600;font-size:24px;color:var(--teal-dd)}
+.logo img{width:44px;height:44px;border-radius:50%}
+nav.main{display:flex;gap:28px;font-size:15px}nav.main a:hover,nav.main a.active{color:var(--rose-d)}
+.cart{position:relative;display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:9px 16px;font-size:14px;cursor:pointer}
+.cart b{background:var(--rose-d);color:#fff;border-radius:999px;min-width:22px;height:22px;display:grid;place-items:center;font-size:12px}
+section.block{padding:90px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:38px}
+.sec-head h2{font-size:clamp(34px,4.4vw,56px);margin-top:8px}
+.sec-head h2 .script{font-size:1.15em}
+footer{background:var(--teal-dd);color:#cfe0df;padding:44px 0 30px;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}footer a:hover{color:#fff}
+.toast{position:fixed;top:90px;right:24px;z-index:80;background:var(--teal-dd);color:#fff;padding:15px 20px;border-radius:16px;box-shadow:var(--sh);font-size:14px;max-width:320px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:.25s}
+.toast.show{opacity:1;transform:none}
+@media(max-width:820px){nav.main{display:none}section.block{padding:60px 0}}
+@media(max-width:560px){.wrap{padding:0 16px}.toast{left:16px;right:16px;max-width:none}}
+
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;padding:60px 0 40px}
+.hero h1{font-size:clamp(46px,6.4vw,88px);margin:14px 0 20px}
+.hero h1 .script{display:block;font-size:.9em;margin-top:4px}
+.hero p{font-size:18px;color:#3f5658;max-width:46ch;margin-bottom:30px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-img{position:relative}
+.hero-img .main{border-radius:200px 200px 24px 24px;overflow:hidden;aspect-ratio:4/5;box-shadow:var(--sh);background:var(--teal-l)}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-img .chip{position:absolute;left:-18px;bottom:36px;background:#fff;border-radius:18px;padding:12px 18px;box-shadow:var(--sh);font-size:13px;color:var(--muted)}
+.hero-img .chip b{display:block;font-family:"Cormorant Garamond",serif;font-size:24px;color:var(--teal-dd)}
+.ticker{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px;color:var(--teal-d);letter-spacing:.08em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);transition:.2s;display:block}
+.card:hover{transform:translateY(-6px);box-shadow:var(--sh)}
+.card .media{aspect-ratio:4/5;overflow:hidden;background:var(--teal-l)}.card img{width:100%;height:100%;object-fit:cover}
+.card .body{padding:16px 18px 20px}.card h3{font-size:25px}
+.card .pr{font-size:14px;color:var(--muted);margin-top:4px}.card .pr b{color:var(--rose-d);font-weight:500;font-size:16px}
+.card .more{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-d);margin-top:8px}
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;background:var(--teal-l);border-radius:40px;padding:56px}
+.feature .imgs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.feature .imgs img{border-radius:18px;aspect-ratio:4/5;object-fit:cover;width:100%}
+.feature .imgs img:nth-child(2){margin-top:34px}
+.feature h2{font-size:clamp(34px,4vw,52px);margin:10px 0 16px}.feature p{color:#3f5658;margin-bottom:24px;max-width:46ch}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 22px}
+.step .n{font-family:"Cormorant Garamond",serif;font-size:46px;color:var(--rose);line-height:1}
+.step h3{font-size:24px;margin:8px 0 8px}.step p{font-size:14.5px;color:var(--muted)}
+.price-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pl{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 26px 18px}
+.pl h3{font-size:26px;margin-bottom:10px}
+.pl table{width:100%;border-collapse:collapse;font-size:14.5px}
+.pl td{padding:8px 0;border-bottom:1px dashed var(--line)}.pl td:last-child{text-align:right;white-space:nowrap;font-weight:500;color:var(--teal-dd);padding-left:10px}
+.note{font-size:13px;color:var(--muted);margin-top:16px}
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:12px}
+.rev p{font-family:"Cormorant Garamond",serif;font-size:21px;line-height:1.3;flex:1}.rev b{font-size:13px;color:var(--rose-d);font-weight:500;letter-spacing:.06em}
+.mosaic{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.mosaic img{border-radius:16px;aspect-ratio:1;object-fit:cover;width:100%}
+@media(max-width:1000px){.grid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.price-cols{grid-template-columns:1fr}.revs{grid-template-columns:1fr}.feature{grid-template-columns:1fr;padding:34px 24px}}
+@media(max-width:820px){.hero{grid-template-columns:1fr;gap:34px;padding-top:34px}.hero-img .chip{left:10px}}
+@media(max-width:520px){.grid{gap:12px}.card h3{font-size:20px}.steps{grid-template-columns:1fr}.mosaic{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<div class="announce">Sve se radi po porudžbini · Ručno oslikano · Ekološke boje</div>
+<header class="site"><div class="wrap">
+<a class="logo" href="index.html"><img src="img/logo.jpg" alt="She Made logo">She Made</a>
+<nav class="main"><a href="index.html#kolekcija">Kolekcija</a><a href="kutija-za-uspomene.html">Kutija za uspomene</a><a href="index.html#cenovnik">Cenovnik</a><a href="index.html#poruci">Kako se poručuje</a><a href="index.html#utisci">Utisci</a></nav>
+<div class="cart" id="cartBtn">Upit <b id="cartCount">0</b></div></div></header>
+<main><div class="wrap">
+<section class="hero">
+ <div><span class="eyebrow">Ručno pravljeno · ručno oslikano</span>
+ <h1>Kutije sa imenom <span class="script">i pričom</span></h1>
+ <p>Kutije za igračke i uspomene, gajbice, slike i kocke za dečije sobe. Svaka se pravi samo za vas: u vašim bojama, sa imenom deteta i crtežom koji vam se dopadne. Ekološke boje 🌿</p>
+ <div class="cta"><a class="btn btn-dark" href="kutija-za-uspomene.html">Kutija za uspomene</a><a class="btn btn-ghost" href="#cenovnik">Cenovnik</a></div></div>
+ <div class="hero-img"><div class="main"><img src="img/DdbDn6IAFeU.jpg" alt="Kutija za uspomene sa imenom na poklopcu"></div><div class="chip">Važeći cenovnik<b>od 10.1.2026.</b></div></div>
+</section>
+<div class="ticker"><span>Po vašoj želji</span><span>Ime na svakom komadu</span><span>Ekološke boje</span><span>Dostava poštom</span></div>
+</div>
+
+<section class="block" id="kolekcija"><div class="wrap">
+ <div class="sec-head"><div><span class="eyebrow">Kolekcija</span><h2>Šta sve <span class="script">pravimo</span></h2></div></div>
+ <div class="grid"><a class="card" href="kutija-za-uspomene.html"><div class="media"><img src="img/DdbDn6IAFeU.jpg" alt="Kutija za uspomene sa imenom" loading="lazy"></div><div class="body"><h3>Kutija za uspomene</h3><div class="pr"><small>od</small> <b>7.400 RSD</b></div><div class=more>Pogledaj →</div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/Dc3wdhogM7P.jpg" alt="Oslikana kutija za igračke" loading="lazy"></div><div class="body"><h3>Kutija za igračke</h3><div class="pr"><small>od</small> <b>15.200 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DZh8CRyDfmU.jpg" alt="Gajbica za pelene sa aplikacijom" loading="lazy"></div><div class="body"><h3>Gajbica za pelene</h3><div class="pr"><small>od</small> <b>6.800 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DbD5obcABLm.jpg" alt="Kutija Sweety" loading="lazy"></div><div class="body"><h3>Kutija Sweety</h3><div class="pr"><small>od</small> <b>16.200 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DSvMVEegKSN.jpg" alt="Oval slika na platnu" loading="lazy"></div><div class="body"><h3>Slike na platnu</h3><div class="pr"><small>od</small> <b>6.600 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DadREUsALjH.jpg" alt="Kolica za igračke" loading="lazy"></div><div class="body"><h3>Kolica za igračke</h3><div class="pr"><b>cena na upit</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/Da3JDSogG-B.jpg" alt="Drvene kocke sa slovima" loading="lazy"></div><div class="body"><h3>Slova i kocke</h3><div class="pr"><b>850 RSD / kocka</b></div></div></a><a class="card" href="kutija-za-uspomene.html"><div class="media"><img src="img/DbsWWvtADEJ.jpg" alt="Visoka kutija za uspomene 30×30×30" loading="lazy"></div><div class="body"><h3>Visoka kutija</h3><div class="pr"><b>9.600 RSD</b></div><div class=more>Pogledaj →</div></div></a></div>
+</div></section>
+
+<section class="block" style="padding-top:0"><div class="wrap"><div class="feature">
+ <div class="imgs"><img src="img/DdEk88AgIuA.jpg" alt="Kutija za uspomene sa romboidima" loading="lazy"><img src="img/DcMKB_OAOzF.jpg" alt="Kutija za uspomene sa autićem" loading="lazy"></div>
+ <div><span class="eyebrow">Najtraženije</span><h2>Kutija za uspomene</h2>
+ <p>Za prve stvarčice koje želimo da čuvamo. Tri veličine, ime na poklopcu, aplikacija ili ručno oslikan crtež, u boji koju vi izaberete. „Znate da je meni svaka nova kutija koju uradim omiljena i najlepša.“</p>
+ <a class="btn btn-dark" href="kutija-za-uspomene.html">Izaberi veličinu · od 7.400 RSD</a></div>
+</div></div></section>
+
+<section class="block" id="poruci" style="padding-top:0"><div class="wrap">
+ <div class="sec-head"><div><span class="eyebrow">Kako se poručuje</span><h2>Bez lagera, <span class="script">sve po meri</span></h2></div></div>
+ <div class="steps">
+ <div class="step"><div class="n">1</div><h3>Upit</h3><p>Pošaljite nam upit za odabrani proizvod.</p></div>
+ <div class="step"><div class="n">2</div><h3>Dogovor</h3><p>Dogovorimo detalje, boje i aplikacije. Nema gotovih proizvoda, svaki se radi isključivo po vašoj želji.</p></div>
+ <div class="step"><div class="n">3</div><h3>Avans</h3><p>Uplaćuje se polovina vrednosti i upisujemo vas u prvi slobodan termin. Uglavnom je to 10–25 dana, zavisi od perioda godine.</p></div>
+ <div class="step"><div class="n">4</div><h3>Slanje</h3><p>Pošta, 1–2 puta nedeljno. Paket stiže za 2–5 dana, poštarina je oko 340–600 din. Ostatak plaćate pouzećem ili na račun.</p></div>
+ </div>
+ <p class="note">Poklon za određeni datum? Recite nam odmah, računajte da samo paket putuje 2–5 radnih dana.</p>
+</div></section>
+
+<section class="block" id="cenovnik" style="padding-top:0"><div class="wrap">
+ <div class="sec-head"><div><span class="eyebrow">Cenovnik</span><h2>Važeći <span class="script">cenovnik</span></h2></div><span class="note">Cene u dinarima · važi od 10.1.2026.</span></div>
+ <div class="price-cols"><div class="pl"><h3>Uspomene i gajbice</h3><table><tr><td>Kutija za uspomene 30×30×15 (var. 1 / 2 / 3)</td><td>7.400 / 8.200 / 8.800</td></tr><tr><td>Kutija za uspomene 30×30×30</td><td>9.600 – 10.600</td></tr><tr><td>Kutija za uspomene 40×30×15</td><td>9.600</td></tr><tr><td>Gajbica sa imenom 33×28×15</td><td>6.800</td></tr><tr><td>Gajbica sa aplikacijom 33×28×15</td><td>7.800</td></tr></table></div><div class="pl"><h3>Kutije za igračke</h3><table><tr><td>Kutija SLONIĆ / KUCA / BAMBI / LIJA</td><td>9.600</td></tr><tr><td>Kutija MEDA / PANDA</td><td>10.600</td></tr><tr><td>Kutija SWEETY 50×40</td><td>16.200</td></tr><tr><td>Oslikana kutija 50×40</td><td>16.800</td></tr><tr><td>Oslikana kutija 40×35×40</td><td>15.200</td></tr><tr><td>Oslikana kutija 50×45×50</td><td>21.600</td></tr><tr><td>Oslikana kutija 60×50×55</td><td>25.600</td></tr></table></div><div class="pl"><h3>Nameštaj, slike, slova</h3><table><tr><td>Biblioteka velika 65×30×71</td><td>19.800</td></tr><tr><td>Biblioteka mala 60×42×30</td><td>na upit</td></tr><tr><td>Busić 70×40×40</td><td>15.800</td></tr><tr><td>Kolica</td><td>na upit</td></tr><tr><td>Slika na platnu oval 30×20 / 40×30</td><td>6.600 / 8.600</td></tr><tr><td>Slika na platnu krug 20 / 30 cm</td><td>6.600 / 8.600</td></tr><tr><td>Slika SLOVO / sa aplikacijom</td><td>3.400 / 4.600</td></tr><tr><td>Zastavice 12 kom</td><td>3.600</td></tr><tr><td>Drvena kocka 7×7 · drveno slovo</td><td>850 · 5.200</td></tr></table></div></div>
+</div></section>
+
+<section class="block" id="utisci" style="padding-top:0"><div class="wrap">
+ <div class="sec-head"><div><span class="eyebrow">Utisci</span><h2>Poruke koje <span class="script">greju</span></h2></div></div>
+ <div class="revs"><div class="rev"><p>„Nikako da stignem da javim da smo oduuuuusevljeni kutijom, toliko je lepo oslikana i uopšte svaki detalj je savršen“</p><b>Jovana</b></div><div class="rev"><p>„Jos lepse nego sto sam ocekivala, ne mogu da vam opisem sreću mene a i mog deteta, usrećili ste nas mnogooo.“</p><b>Poruka kupca</b></div><div class="rev"><p>„Paket je stigao i preleeeepoooo je. Oduševili se i mama i beba“</p><b>Poruka kupca</b></div></div>
+ <p class="note">Poruke kupaca iz highlight-a „Utisci“ na Instagram profilu, prenete doslovno.</p>
+</div></section>
+
+<section class="block" style="padding-top:0"><div class="wrap"><div class="mosaic"><img src="img/DdEk88AgIuA.jpg" alt="" loading="lazy"><img src="img/DcMKB_OAOzF.jpg" alt="" loading="lazy"><img src="img/DbdlWmKjZgH.jpg" alt="" loading="lazy"><img src="img/DbAb1Z3AIxq.jpg" alt="" loading="lazy"><img src="img/DaQoNLTAEKI.jpg" alt="" loading="lazy"><img src="img/DZflh-1gNiF.jpg" alt="" loading="lazy"><img src="img/DaVf7VCgBJK.jpg" alt="" loading="lazy"><img src="img/DaD0TkHgNi5.jpg" alt="" loading="lazy"></div></div></section>
+</main><footer><div class="wrap"><span>© 2026 She Made creative studio · ručno pravljene i oslikane kutije i slike za dečije sobe</span><a href="https://www.instagram.com/shemade.creativestudio/" target="_blank" rel="noopener">Instagram @shemade.creativestudio</a></div></footer>
+<div class="toast" id="toast" role="status"></div>
+<script>document.getElementById('cartBtn').onclick=function(){location.href="kutija-za-uspomene.html#upit"};</script>
+</body></html>
