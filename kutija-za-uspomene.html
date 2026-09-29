@@ -33,6 +33,38 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 @media(max-width:820px){nav.main{display:none}section.block{padding:60px 0}}
 @media(max-width:560px){.wrap{padding:0 16px}.toast{left:16px;right:16px;max-width:none}}
 
+.cart{font:inherit;color:inherit}
+.cart-ov{position:fixed;inset:0;background:rgba(38,56,58,.45);z-index:90;opacity:0;pointer-events:none;transition:.25s}
+.cart-ov.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--cream);z-index:95;transform:translateX(100%);transition:.3s;display:flex;flex-direction:column;box-shadow:-12px 0 40px -16px rgba(38,56,58,.4);visibility:hidden}
+.drawer.open{transform:none;visibility:visible}
+.dr-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}
+.dr-head h2{font-size:32px}.dr-x{border:0;background:none;font-size:30px;line-height:1;color:var(--teal-dd)}
+.dr-body{flex:1;overflow:auto;padding:16px 22px}
+.dr-foot{padding:16px 22px 20px;border-top:1px solid var(--line);background:#fff}
+.dr-empty{color:var(--muted);text-align:center;padding:50px 0}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.line img{width:64px;height:80px;object-fit:cover;border-radius:10px;background:var(--teal-l)}
+.line h4{font-family:"Cormorant Garamond",serif;font-size:20px;font-weight:600;color:var(--teal-dd);line-height:1.1}
+.line .d{font-size:12.5px;color:var(--muted);margin-top:3px}
+.line .lp{font-weight:500;color:var(--teal-dd);white-space:nowrap;text-align:right}
+.line .note-in{grid-column:2/4;width:100%;border:1.5px solid var(--line);border-radius:10px;padding:7px 10px;font:inherit;font-size:13px;background:#fff}
+.qty{display:inline-flex;align-items:center;gap:2px;margin-top:8px;border:1.5px solid var(--line);border-radius:999px;background:#fff}
+.qty button{border:0;background:none;width:30px;height:30px;font-size:18px;color:var(--teal-dd)}.qty span{min-width:22px;text-align:center;font-size:14px}
+.rm{border:0;background:none;color:var(--rose-d);font-size:12px;margin-top:6px;text-decoration:underline;display:block;margin-left:auto}
+.tot{display:flex;justify-content:space-between;font-size:18px;font-weight:500;color:var(--teal-dd);margin-bottom:4px}
+.tot-note{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+.help{font-size:12.5px;color:var(--muted);margin-top:12px;text-align:center}.help a{color:var(--teal-d);text-decoration:underline}
+.co label{display:block;font-size:13px;font-weight:500;color:var(--teal-dd);margin:10px 0 4px}
+.co .f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.co input,.co textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;font:inherit;font-size:15px;background:#fff;color:var(--ink)}
+.co input:focus,.co textarea:focus{outline:none;border-color:var(--teal-d)}
+.pay{margin:14px 0 4px;padding:12px 14px;border-radius:12px;background:var(--teal-l);font-size:14px;color:var(--teal-dd)}
+.co .err{color:#a33;font-size:12.5px;margin-top:8px;min-height:16px}
+.done{text-align:center;padding:30px 0}.done h3{font-size:36px;margin:10px 0}.done p{color:var(--muted);margin-bottom:8px}
+.done .sum{text-align:left;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:14px;margin:18px 0}
+.addbtn{border:1.5px solid var(--teal-dd);background:none;color:var(--teal-dd);border-radius:999px;padding:3px 12px;font-size:13px;margin-left:8px;transition:.15s}.addbtn:hover{background:var(--teal-dd);color:#fff}
+
 .crumbs{font-size:13px;color:var(--muted);padding:22px 0}.crumbs span{margin:0 8px;opacity:.5}
 .product{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start;padding-bottom:70px}
 .gallery{display:grid;grid-template-columns:84px 1fr;gap:14px;position:sticky;top:94px}
@@ -80,7 +112,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 <header class="site"><div class="wrap">
 <a class="logo" href="index.html"><img src="img/logo.jpg" alt="She Made logo">She Made</a>
 <nav class="main"><a href="index.html#kolekcija">Kolekcija</a><a href="kutija-za-uspomene.html">Kutija za uspomene</a><a href="index.html#cenovnik">Cenovnik</a><a href="index.html#poruci">Kako se poručuje</a><a href="index.html#utisci">Utisci</a></nav>
-<div class="cart" id="cartBtn">Upit <b id="cartCount">0</b></div></div></header>
+<button class="cart" id="cartBtn" type="button" aria-label="Otvori korpu">Korpa <b id="cartCount">0</b></button></div></header>
 <main><div class="wrap">
 <nav class="crumbs"><a href="index.html">Početna</a><span>/</span><a href="index.html#kolekcija">Kolekcija</a><span>/</span>Kutija za uspomene</nav>
 <div class="product">
@@ -95,11 +127,10 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
   <div class="opt" id="varOpt"><div class="opt-head">Varijanta <span id="varName"></span></div><div class="vars" id="vars"></div></div>
   <div class="opt"><div class="opt-head">Ime na poklopcu</div><input class="field" id="nameIn" maxlength="24" placeholder="npr. Helena"></div>
   <div class="opt"><div class="opt-head">Željene boje <span id="swName">Puder roze</span></div><div class="swatches" id="sw"></div>
-   <p style="font-size:13px;color:var(--muted);margin-top:8px">Boje i motiv dogovaramo u poruci. Ovo su nijanse sa naših radova.</p></div>
+   <p style="font-size:13px;color:var(--muted);margin-top:8px">Ovo su nijanse sa naših radova. Motiv i dodatne želje upišite uz komad u korpi.</p></div>
 
-  <div class="buy" id="upit"><button class="btn btn-dark" type="button" onclick="addInquiry()">Dodaj u upit</button></div>
-  <a class="btn btn-ghost dm" href="https://www.instagram.com/shemade.creativestudio/" target="_blank" rel="noopener" onclick="copyMsg()">Pošalji upit na Instagram</a>
-  <p style="font-size:13px;color:var(--muted);margin-top:10px">Poručivanje ide preko poruke: kopiramo vaš izbor, a vi ga nalepite u DM. Uplaćuje se avans od polovine vrednosti.</p>
+  <div class="buy" id="upit"><button class="btn btn-dark" type="button" onclick="addToCart()">Dodaj u korpu</button></div>
+  <p style="font-size:13px;color:var(--muted);margin-top:10px">Plaćanje pouzećem. Izrada 10–25 dana od poručivanja, poštom stiže za 2–5 dana. Pitanja? Pišite nam na Instagramu <a href="https://www.instagram.com/shemade.creativestudio/" target="_blank" rel="noopener" style="text-decoration:underline">@shemade.creativestudio</a></p>
 
   <div class="perks"><div class="perk">Ručno oslikano</div><div class="perk">Ime na poklopcu</div><div class="perk">Ekološke boje</div></div>
   <div class="acc">
@@ -110,9 +141,9 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
     <tr><td>30×30×30 cm, aplikacija + ime</td><td>9.600 RSD</td></tr>
     <tr><td>30×30×30 cm, ručno oslikana + ime</td><td>10.600 RSD</td></tr>
     <tr><td>40×30×15 cm</td><td>9.600 RSD</td></tr></table>
-    <p style="margin-top:8px;font-size:13px">Šta se razlikuje između varijanti 1, 2 i 3 kod veličine 30×30×15 objasnićemo u poruci.</p></div></details>
-   <details><summary>Kako poručiti</summary><div class="inner"><ul><li>Pošaljite upit za odabranu kutiju</li><li>Dogovorimo boje, aplikaciju i ime</li><li>Uplata avansa u iznosu polovine vrednosti</li><li>Izrada 10–25 dana od poručivanja, zavisi od perioda godine</li><li>Slanje poštom, paket stiže za 2–5 dana; ostatak pouzećem ili na račun</li></ul></div></details>
-   <details><summary>Dostava</summary><div class="inner"><p>Paketi se šalju 1–2 puta nedeljno poštom. Poštarina je oko 340–600 din, a veća je ako postoji otkup. Nijedan paket se ne šalje bez prethodnog dogovora.</p></div></details>
+</div></details>
+   <details><summary>Kako poručiti</summary><div class="inner"><ul><li>Izaberite veličinu, varijantu, ime i boju i kliknite „Dodaj u korpu“</li><li>U korpi upišite podatke za isporuku</li><li>Izrada 10–25 dana od poručivanja, zavisi od perioda godine</li><li>Slanje poštom, paket stiže za 2–5 dana; plaćanje pouzećem</li></ul></div></details>
+   <details><summary>Dostava</summary><div class="inner"><p>Paketi se šalju 1–2 puta nedeljno poštom. Poštarina je oko 340–600 din, a veća je ako postoji otkup.</p></div></details>
   </div>
  </div>
 </div></div>
@@ -140,8 +171,13 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
  </div>
 </div></section>
 </main><footer><div class="wrap"><span>© 2026 She Made creative studio · ručno pravljene i oslikane kutije i slike za dečije sobe</span><a href="https://www.instagram.com/shemade.creativestudio/" target="_blank" rel="noopener">Instagram @shemade.creativestudio</a></div></footer>
-<div class="toast" id="toast" role="status"></div>
-<div class="sticky-buy"><div class="t"><b>Kutija za uspomene</b><span id="stickyPrice"></span></div><button class="btn btn-dark" onclick="addInquiry()">Dodaj u upit</button></div>
+<div class="toast" id="toast" role="status"></div><div class="cart-ov" id="cartOv"></div>
+<aside class="drawer" id="drawer" aria-label="Korpa" aria-hidden="true">
+ <div class="dr-head"><h2>Korpa</h2><button class="dr-x" id="drX" type="button" aria-label="Zatvori">&times;</button></div>
+ <div class="dr-body" id="drBody"></div>
+ <div class="dr-foot" id="drFoot"></div>
+</aside>
+<div class="sticky-buy"><div class="t"><b>Kutija za uspomene</b><span id="stickyPrice"></span></div><button class="btn btn-dark" onclick="addToCart()">Dodaj u korpu</button></div>
 <script>
 const GAL=['DdbDn6IAFeU', 'DdbDn6IAFeU_02', 'DdEk88AgIuA', 'DdEk88AgIuA_02', 'DcMKB_OAOzF', 'DcMKB_OAOzF_02', 'DcBFlSkgBDR', 'DcBFlSkgBDR_02', 'DbsWWvtADEJ', 'DbsWWvtADEJ_02', 'Db3VIjvgBkU', 'DZflh-1gNiF', 'DaQoNLTAEKI', 'DaQoNLTAEKI_02', 'Ddt3mXAgKpT'];
 const SIZES=[
@@ -167,10 +203,88 @@ function render(){
  document.querySelectorAll('#vars button').forEach(b=>b.onclick=()=>{st.v=+b.dataset.i;render()});
  document.querySelectorAll('#sw button').forEach(b=>b.onclick=()=>{st.c=+b.dataset.i;render()});
 }
-function msg(){const s=SIZES[st.s],v=s.vars[st.v];const nm=$('nameIn').value.trim();
- return `Zdravo! Zanima me Kutija za uspomene ${s.id} cm (${v.n}, ${fmt(v.p)}), boja: ${SW[st.c][0].toLowerCase()}${nm?', ime: '+nm:''}. Molim vas za dogovor oko detalja.`}
-function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),3200)}
-function copyMsg(){try{navigator.clipboard.writeText(msg());toast('Poruka je kopirana. Nalepite je u DM.')}catch(e){}}
-function addInquiry(){st.n++;$('cartCount').textContent=st.n;copyMsg();toast('Dodato u upit. Tekst poruke je kopiran, nalepite ga u DM.')}
+function addToCart(){const s=SIZES[st.s],v=s.vars[st.v],nm=$('nameIn').value.trim();
+ const d=[v.n,'boja: '+SW[st.c][0].toLowerCase()];if(nm)d.push('ime: '+nm);
+ window.Cart.add({id:'ku-'+s.id+'-'+v.n,name:'Kutija za uspomene '+s.id+' cm',detail:d.join(' · '),price:v.p,img:'img/DdbDn6IAFeU.jpg'})}
 render();
+</script><script>
+(function(){
+var KEY='shemade-cart',IGU='https://www.instagram.com/shemade.creativestudio/';
+var items=[],mode='cart',order=null;
+try{items=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){items=[]}
+if(!Array.isArray(items))items=[];
+function g(id){return document.getElementById(id)}
+function fmt(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' RSD'}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(items))}catch(e){}}
+function count(){return items.reduce(function(a,i){return a+i.qty},0)}
+function total(){return items.reduce(function(a,i){return a+i.qty*i.price},0)}
+function toast(t){var e=g('toast');if(!e)return;e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){e.classList.remove('show')},2600)}
+function open(){g('cartOv').classList.add('open');g('drawer').classList.add('open');g('drawer').setAttribute('aria-hidden','false');render()}
+function close(){g('cartOv').classList.remove('open');g('drawer').classList.remove('open');g('drawer').setAttribute('aria-hidden','true');if(mode!=='cart'&&(mode==='done'||!items.length)){mode='cart';order=null;render()}}
+function add(it){
+ var k=[it.id,(it.detail||''),(it.note||'')].join('|'),f=items.filter(function(x){return x.key===k})[0];
+ if(f)f.qty+=it.qty||1;else items.push({key:k,id:it.id,name:it.name,detail:it.detail||'',note:it.note||'',price:it.price,img:it.img||'',qty:it.qty||1});
+ save();mode='cart';render();toast('Dodato u korpu: '+it.name)
+}
+function line(i,x){
+ return '<div class="line">'+(x.img?'<img src="'+esc(x.img)+'" alt="">':'<div></div>')+
+ '<div><h4>'+esc(x.name)+'</h4>'+(x.detail?'<div class="d">'+esc(x.detail)+'</div>':'')+
+ '<div class="qty"><button type="button" data-a="dec" data-i="'+i+'" aria-label="Manje">&minus;</button><span>'+x.qty+'</span><button type="button" data-a="inc" data-i="'+i+'" aria-label="Više">+</button></div></div>'+
+ '<div><div class="lp">'+fmt(x.price*x.qty)+'</div><button class="rm" type="button" data-a="rm" data-i="'+i+'">Ukloni</button></div>'+
+ '<input class="note-in" data-i="'+i+'" value="'+esc(x.note)+'" maxlength="140" placeholder="Ime, boje, tekst ili želja za ovaj komad" aria-label="Personalizacija"></div>'
+}
+function help(){return '<p class="help">Pitanja? Pišite nam na Instagramu <a href="'+IGU+'" target="_blank" rel="noopener">@shemade.creativestudio</a></p>'}
+function inner(x){return x.qty+' × '+esc(x.name)+(x.detail||x.note?' <small>('+esc(x.detail)+(x.detail&&x.note?'; ':'')+esc(x.note)+')</small>':'')}
+function sumLine(x){return '<div>'+inner(x)+' · '+fmt(x.qty*x.price)+'</div>'}
+function render(){
+ var c=count(),b=g('cartCount');if(b)b.textContent=c;
+ var body=g('drBody'),foot=g('drFoot');if(!body)return;
+ var sc=document.querySelectorAll('.cart-n');for(var s=0;s<sc.length;s++)sc[s].textContent=c;
+ if(mode==='done'){
+  body.innerHTML='<div class="done"><div class="script" style="font-size:34px">She Made</div><h3>Hvala, porudžbina je primljena</h3><p>Broj porudžbine: <b>'+esc(order.no)+'</b></p><p>Potvrda je poslata na '+esc(order.email)+'.</p><div class="sum">'+order.lines+'<div style="margin-top:8px"><b>Ukupno proizvodi: '+fmt(order.total)+'</b><br>Plaćanje pouzećem, poštarina po tarifi pošte.</div></div><button class="btn btn-dark" id="doneBtn" type="button">Nastavi kupovinu</button></div>';
+  foot.innerHTML=help();g('doneBtn').onclick=close;return
+ }
+ if(!items.length){mode='cart';body.innerHTML='<div class="dr-empty">Korpa je prazna.<br>Izaberite proizvod i dodajte ga u korpu.</div>';foot.innerHTML=help();return}
+ if(mode==='checkout'){
+  body.innerHTML=items.map(function(x){return '<div style="display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:6px 0;border-bottom:1px dashed var(--line)"><span>'+inner(x)+'</span><b style="white-space:nowrap">'+fmt(x.qty*x.price)+'</b></div>'}).join('')+
+  '<form class="co" id="coForm" novalidate><label for="cName">Ime i prezime</label><input id="cName" autocomplete="name" required>'+
+  '<label for="cAddr">Adresa (ulica i broj)</label><input id="cAddr" autocomplete="street-address" required>'+
+  '<div class="f2"><div><label for="cCity">Grad</label><input id="cCity" autocomplete="address-level2" required></div><div><label for="cZip">Poštanski broj</label><input id="cZip" autocomplete="postal-code" inputmode="numeric"></div></div>'+
+  '<label for="cTel">Telefon</label><input id="cTel" type="tel" autocomplete="tel" required>'+
+  '<label for="cMail">E-mail</label><input id="cMail" type="email" autocomplete="email" required>'+
+  '<label for="cNote">Napomena / personalizacija</label><textarea id="cNote" rows="3" placeholder="Ime na poklopcu, boje, motiv, datum kada vam treba"></textarea>'+
+  '<div class="pay"><b>Plaćanje pouzećem</b><br>Plaćate pri preuzimanju paketa.</div><div class="err" id="cErr"></div></form>';
+  foot.innerHTML='<div class="tot"><span>Proizvodi</span><span>'+fmt(total())+'</span></div><div class="tot-note">Poštarina nije uračunata (oko 340–600 din, po tarifi pošte).</div><button class="btn btn-dark" id="placeBtn" type="button" style="width:100%">Potvrdi porudžbinu</button><button class="btn btn-ghost" id="backBtn" type="button" style="width:100%;margin-top:8px">Nazad na korpu</button>'+help();
+  g('backBtn').onclick=function(){mode='cart';render()};
+  g('placeBtn').onclick=place;return
+ }
+ body.innerHTML=items.map(function(x,i){return line(i,x)}).join('');
+ foot.innerHTML='<div class="tot"><span>Ukupno</span><span>'+fmt(total())+'</span></div><div class="tot-note">Poštarina nije uračunata (oko 340–600 din). Plaćanje pouzećem. Izrada 10–25 dana.</div><button class="btn btn-dark" id="coBtn" type="button" style="width:100%">Na plaćanje</button>'+help();
+ g('coBtn').onclick=function(){mode='checkout';render()}
+}
+function place(){
+ var v=function(id){return g(id).value.trim()},err=g('cErr');
+ var f={name:v('cName'),addr:v('cAddr'),city:v('cCity'),tel:v('cTel'),email:v('cMail')};
+ if(!f.name||!f.addr||!f.city||!f.tel||!f.email){err.textContent='Popunite ime, adresu, grad, telefon i e-mail.';return}
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email)){err.textContent='Unesite ispravnu e-mail adresu.';return}
+ if(f.tel.replace(/\D/g,'').length<6){err.textContent='Unesite ispravan broj telefona.';return}
+ var nt=v('cNote');
+ order={no:'SM-'+Date.now().toString(36).toUpperCase().slice(-6),email:f.email,total:total(),lines:items.map(sumLine).join('')+(nt?'<div>Napomena: '+esc(nt)+'</div>':'')};
+ items=[];save();mode='done';render()
+}
+document.addEventListener('click',function(e){
+ var t=e.target.closest?e.target.closest('[data-a]'):null;
+ if(t&&g('drawer').contains(t)){var i=+t.dataset.i,a=t.dataset.a;
+  if(a==='inc')items[i].qty++;else if(a==='dec'){items[i].qty--;if(items[i].qty<1)items.splice(i,1)}else if(a==='rm')items.splice(i,1);
+  save();render();return}
+ var ad=e.target.closest?e.target.closest('[data-add]'):null;
+ if(ad){add({id:ad.dataset.add,name:ad.dataset.name,detail:ad.dataset.detail||'',price:+ad.dataset.price,img:ad.dataset.img||''})}
+});
+document.addEventListener('input',function(e){if(e.target.classList&&e.target.classList.contains('note-in')){items[+e.target.dataset.i].note=e.target.value;save()}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+g('cartBtn').onclick=open;g('cartOv').onclick=close;g('drX').onclick=close;
+window.Cart={add:add,open:open};
+render();
+})();
 </script></body></html>

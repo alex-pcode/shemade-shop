@@ -33,6 +33,38 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 @media(max-width:820px){nav.main{display:none}section.block{padding:60px 0}}
 @media(max-width:560px){.wrap{padding:0 16px}.toast{left:16px;right:16px;max-width:none}}
 
+.cart{font:inherit;color:inherit}
+.cart-ov{position:fixed;inset:0;background:rgba(38,56,58,.45);z-index:90;opacity:0;pointer-events:none;transition:.25s}
+.cart-ov.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--cream);z-index:95;transform:translateX(100%);transition:.3s;display:flex;flex-direction:column;box-shadow:-12px 0 40px -16px rgba(38,56,58,.4);visibility:hidden}
+.drawer.open{transform:none;visibility:visible}
+.dr-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}
+.dr-head h2{font-size:32px}.dr-x{border:0;background:none;font-size:30px;line-height:1;color:var(--teal-dd)}
+.dr-body{flex:1;overflow:auto;padding:16px 22px}
+.dr-foot{padding:16px 22px 20px;border-top:1px solid var(--line);background:#fff}
+.dr-empty{color:var(--muted);text-align:center;padding:50px 0}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.line img{width:64px;height:80px;object-fit:cover;border-radius:10px;background:var(--teal-l)}
+.line h4{font-family:"Cormorant Garamond",serif;font-size:20px;font-weight:600;color:var(--teal-dd);line-height:1.1}
+.line .d{font-size:12.5px;color:var(--muted);margin-top:3px}
+.line .lp{font-weight:500;color:var(--teal-dd);white-space:nowrap;text-align:right}
+.line .note-in{grid-column:2/4;width:100%;border:1.5px solid var(--line);border-radius:10px;padding:7px 10px;font:inherit;font-size:13px;background:#fff}
+.qty{display:inline-flex;align-items:center;gap:2px;margin-top:8px;border:1.5px solid var(--line);border-radius:999px;background:#fff}
+.qty button{border:0;background:none;width:30px;height:30px;font-size:18px;color:var(--teal-dd)}.qty span{min-width:22px;text-align:center;font-size:14px}
+.rm{border:0;background:none;color:var(--rose-d);font-size:12px;margin-top:6px;text-decoration:underline;display:block;margin-left:auto}
+.tot{display:flex;justify-content:space-between;font-size:18px;font-weight:500;color:var(--teal-dd);margin-bottom:4px}
+.tot-note{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+.help{font-size:12.5px;color:var(--muted);margin-top:12px;text-align:center}.help a{color:var(--teal-d);text-decoration:underline}
+.co label{display:block;font-size:13px;font-weight:500;color:var(--teal-dd);margin:10px 0 4px}
+.co .f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.co input,.co textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;font:inherit;font-size:15px;background:#fff;color:var(--ink)}
+.co input:focus,.co textarea:focus{outline:none;border-color:var(--teal-d)}
+.pay{margin:14px 0 4px;padding:12px 14px;border-radius:12px;background:var(--teal-l);font-size:14px;color:var(--teal-dd)}
+.co .err{color:#a33;font-size:12.5px;margin-top:8px;min-height:16px}
+.done{text-align:center;padding:30px 0}.done h3{font-size:36px;margin:10px 0}.done p{color:var(--muted);margin-bottom:8px}
+.done .sum{text-align:left;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:14px;margin:18px 0}
+.addbtn{border:1.5px solid var(--teal-dd);background:none;color:var(--teal-dd);border-radius:999px;padding:3px 12px;font-size:13px;margin-left:8px;transition:.15s}.addbtn:hover{background:var(--teal-dd);color:#fff}
+
 .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;padding:60px 0 40px}
 .hero h1{font-size:clamp(46px,6.4vw,88px);margin:14px 0 20px}
 .hero h1 .script{display:block;font-size:.9em;margin-top:4px}
@@ -79,7 +111,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 <header class="site"><div class="wrap">
 <a class="logo" href="index.html"><img src="img/logo.jpg" alt="She Made logo">She Made</a>
 <nav class="main"><a href="index.html#kolekcija">Kolekcija</a><a href="kutija-za-uspomene.html">Kutija za uspomene</a><a href="index.html#cenovnik">Cenovnik</a><a href="index.html#poruci">Kako se poručuje</a><a href="index.html#utisci">Utisci</a></nav>
-<div class="cart" id="cartBtn">Upit <b id="cartCount">0</b></div></div></header>
+<button class="cart" id="cartBtn" type="button" aria-label="Otvori korpu">Korpa <b id="cartCount">0</b></button></div></header>
 <main><div class="wrap">
 <section class="hero">
  <div><span class="eyebrow">Ručno pravljeno · ručno oslikano</span>
@@ -93,40 +125,125 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 
 <section class="block" id="kolekcija"><div class="wrap">
  <div class="sec-head"><div><span class="eyebrow">Kolekcija</span><h2>Šta sve <span class="script">pravimo</span></h2></div></div>
- <div class="grid"><a class="card" href="kutija-za-uspomene.html"><div class="media"><img src="img/DdbDn6IAFeU.jpg" alt="Kutija za uspomene sa imenom" loading="lazy"></div><div class="body"><h3>Kutija za uspomene</h3><div class="pr"><small>od</small> <b>7.400 RSD</b></div><div class=more>Pogledaj →</div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/Dc3wdhogM7P.jpg" alt="Oslikana kutija za igračke" loading="lazy"></div><div class="body"><h3>Kutija za igračke</h3><div class="pr"><small>od</small> <b>15.200 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DZh8CRyDfmU.jpg" alt="Gajbica za pelene sa aplikacijom" loading="lazy"></div><div class="body"><h3>Gajbica za pelene</h3><div class="pr"><small>od</small> <b>6.800 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DbD5obcABLm.jpg" alt="Kutija Sweety" loading="lazy"></div><div class="body"><h3>Kutija Sweety</h3><div class="pr"><small>od</small> <b>16.200 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DSvMVEegKSN.jpg" alt="Oval slika na platnu" loading="lazy"></div><div class="body"><h3>Slike na platnu</h3><div class="pr"><small>od</small> <b>6.600 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DadREUsALjH.jpg" alt="Kolica za igračke" loading="lazy"></div><div class="body"><h3>Kolica za igračke</h3><div class="pr"><b>cena na upit</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/Da3JDSogG-B.jpg" alt="Drvene kocke sa slovima" loading="lazy"></div><div class="body"><h3>Slova i kocke</h3><div class="pr"><b>850 RSD / kocka</b></div></div></a><a class="card" href="kutija-za-uspomene.html"><div class="media"><img src="img/DbsWWvtADEJ.jpg" alt="Visoka kutija za uspomene 30×30×30" loading="lazy"></div><div class="body"><h3>Visoka kutija</h3><div class="pr"><b>9.600 RSD</b></div><div class=more>Pogledaj →</div></div></a></div>
+ <div class="grid"><a class="card" href="kutija-za-uspomene.html"><div class="media"><img src="img/DdbDn6IAFeU.jpg" alt="Kutija za uspomene sa imenom" loading="lazy"></div><div class="body"><h3>Kutija za uspomene</h3><div class="pr"><small>od</small> <b>7.400 RSD</b></div><div class=more>Pogledaj →</div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/Dc3wdhogM7P.jpg" alt="Oslikana kutija za igračke" loading="lazy"></div><div class="body"><h3>Kutija za igračke</h3><div class="pr"><small>od</small> <b>15.200 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DZh8CRyDfmU.jpg" alt="Gajbica za pelene sa aplikacijom" loading="lazy"></div><div class="body"><h3>Gajbica za pelene</h3><div class="pr"><small>od</small> <b>6.800 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DbD5obcABLm.jpg" alt="Kutija Sweety" loading="lazy"></div><div class="body"><h3>Kutija Sweety</h3><div class="pr"><small>od</small> <b>16.200 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DSvMVEegKSN.jpg" alt="Oval slika na platnu" loading="lazy"></div><div class="body"><h3>Slike na platnu</h3><div class="pr"><small>od</small> <b>6.600 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/DadREUsALjH.jpg" alt="Kolica za igračke" loading="lazy"></div><div class="body"><h3>Kolica za igračke</h3><div class="pr"><small>od</small> <b>9.800 RSD</b></div></div></a><a class="card" href="#cenovnik"><div class="media"><img src="img/Da3JDSogG-B.jpg" alt="Drvene kocke sa slovima" loading="lazy"></div><div class="body"><h3>Slova i kocke</h3><div class="pr"><b>850 RSD / kocka</b></div></div></a><a class="card" href="kutija-za-uspomene.html"><div class="media"><img src="img/DbsWWvtADEJ.jpg" alt="Visoka kutija za uspomene 30×30×30" loading="lazy"></div><div class="body"><h3>Visoka kutija</h3><div class="pr"><b>9.600 RSD</b></div><div class=more>Pogledaj →</div></div></a></div>
 </div></section>
 
 <section class="block" style="padding-top:0"><div class="wrap"><div class="feature">
  <div class="imgs"><img src="img/DdEk88AgIuA.jpg" alt="Kutija za uspomene sa romboidima" loading="lazy"><img src="img/DcMKB_OAOzF.jpg" alt="Kutija za uspomene sa autićem" loading="lazy"></div>
  <div><span class="eyebrow">Najtraženije</span><h2>Kutija za uspomene</h2>
  <p>Za prve stvarčice koje želimo da čuvamo. Tri veličine, ime na poklopcu, aplikacija ili ručno oslikan crtež, u boji koju vi izaberete. „Znate da je meni svaka nova kutija koju uradim omiljena i najlepša.“</p>
- <a class="btn btn-dark" href="kutija-za-uspomene.html">Izaberi veličinu · od 7.400 RSD</a></div>
+ <a class="btn btn-dark" href="kutija-za-uspomene.html">Izaberi i dodaj u korpu · od 7.400 RSD</a></div>
 </div></div></section>
 
 <section class="block" id="poruci" style="padding-top:0"><div class="wrap">
  <div class="sec-head"><div><span class="eyebrow">Kako se poručuje</span><h2>Bez lagera, <span class="script">sve po meri</span></h2></div></div>
  <div class="steps">
- <div class="step"><div class="n">1</div><h3>Upit</h3><p>Pošaljite nam upit za odabrani proizvod.</p></div>
- <div class="step"><div class="n">2</div><h3>Dogovor</h3><p>Dogovorimo detalje, boje i aplikacije. Nema gotovih proizvoda, svaki se radi isključivo po vašoj želji.</p></div>
- <div class="step"><div class="n">3</div><h3>Avans</h3><p>Uplaćuje se polovina vrednosti i upisujemo vas u prvi slobodan termin. Uglavnom je to 10–25 dana, zavisi od perioda godine.</p></div>
- <div class="step"><div class="n">4</div><h3>Slanje</h3><p>Pošta, 1–2 puta nedeljno. Paket stiže za 2–5 dana, poštarina je oko 340–600 din. Ostatak plaćate pouzećem ili na račun.</p></div>
+ <div class="step"><div class="n">1</div><h3>Izaberite</h3><p>Odaberite proizvod, veličinu, ime i boje. Nema gotovih proizvoda, svaki se radi isključivo po vašoj želji.</p></div>
+ <div class="step"><div class="n">2</div><h3>Korpa</h3><p>Dodajte u korpu, upišite ime, boje ili motiv uz svaki komad i unesite podatke za isporuku.</p></div>
+ <div class="step"><div class="n">3</div><h3>Izrada</h3><p>Upisujemo vas u prvi slobodan termin. Uglavnom je to 10–25 dana, zavisi od perioda godine.</p></div>
+ <div class="step"><div class="n">4</div><h3>Slanje</h3><p>Pošta, 1–2 puta nedeljno. Paket stiže za 2–5 dana, poštarina je oko 340–600 din. Plaćanje pouzećem.</p></div>
  </div>
- <p class="note">Poklon za određeni datum? Recite nam odmah, računajte da samo paket putuje 2–5 radnih dana.</p>
+ <p class="note">Poklon za određeni datum? Upišite ga u napomenu, računajte da samo paket putuje 2–5 radnih dana.</p>
 </div></section>
 
 <section class="block" id="cenovnik" style="padding-top:0"><div class="wrap">
- <div class="sec-head"><div><span class="eyebrow">Cenovnik</span><h2>Važeći <span class="script">cenovnik</span></h2></div><span class="note">Cene u dinarima · važi od 10.1.2026.</span></div>
- <div class="price-cols"><div class="pl"><h3>Uspomene i gajbice</h3><table><tr><td>Kutija za uspomene 30×30×15 (var. 1 / 2 / 3)</td><td>7.400 / 8.200 / 8.800</td></tr><tr><td>Kutija za uspomene 30×30×30</td><td>9.600 – 10.600</td></tr><tr><td>Kutija za uspomene 40×30×15</td><td>9.600</td></tr><tr><td>Gajbica sa imenom 33×28×15</td><td>6.800</td></tr><tr><td>Gajbica sa aplikacijom 33×28×15</td><td>7.800</td></tr></table></div><div class="pl"><h3>Kutije za igračke</h3><table><tr><td>Kutija SLONIĆ / KUCA / BAMBI / LIJA</td><td>9.600</td></tr><tr><td>Kutija MEDA / PANDA</td><td>10.600</td></tr><tr><td>Kutija SWEETY 50×40</td><td>16.200</td></tr><tr><td>Oslikana kutija 50×40</td><td>16.800</td></tr><tr><td>Oslikana kutija 40×35×40</td><td>15.200</td></tr><tr><td>Oslikana kutija 50×45×50</td><td>21.600</td></tr><tr><td>Oslikana kutija 60×50×55</td><td>25.600</td></tr></table></div><div class="pl"><h3>Nameštaj, slike, slova</h3><table><tr><td>Biblioteka velika 65×30×71</td><td>19.800</td></tr><tr><td>Biblioteka mala 60×42×30</td><td>na upit</td></tr><tr><td>Busić 70×40×40</td><td>15.800</td></tr><tr><td>Kolica</td><td>na upit</td></tr><tr><td>Slika na platnu oval 30×20 / 40×30</td><td>6.600 / 8.600</td></tr><tr><td>Slika na platnu krug 20 / 30 cm</td><td>6.600 / 8.600</td></tr><tr><td>Slika SLOVO / sa aplikacijom</td><td>3.400 / 4.600</td></tr><tr><td>Zastavice 12 kom</td><td>3.600</td></tr><tr><td>Drvena kocka 7×7 · drveno slovo</td><td>850 · 5.200</td></tr></table></div></div>
+ <div class="sec-head"><div><span class="eyebrow">Cenovnik</span><h2>Važeći <span class="script">cenovnik</span></h2></div><span class="note">Cene u dinarima · važi od 10.1.2026. · ime i boje upišite u korpi uz svaki komad</span></div>
+ <div class="price-cols"><div class="pl"><h3>Uspomene i gajbice</h3><table><tr><td>Kutija za uspomene 30×30×15, varijanta 1</td><td>7.400 RSD<button class="addbtn" type="button" data-add="ku-15-1" data-name="Kutija za uspomene 30×30×15, varijanta 1" data-price="7400" data-img="img/DdbDn6IAFeU.jpg" aria-label="Dodaj u korpu: Kutija za uspomene 30×30×15, varijanta 1">Dodaj</button></td></tr><tr><td>Kutija za uspomene 30×30×15, varijanta 2</td><td>8.200 RSD<button class="addbtn" type="button" data-add="ku-15-2" data-name="Kutija za uspomene 30×30×15, varijanta 2" data-price="8200" data-img="img/DdbDn6IAFeU.jpg" aria-label="Dodaj u korpu: Kutija za uspomene 30×30×15, varijanta 2">Dodaj</button></td></tr><tr><td>Kutija za uspomene 30×30×15, varijanta 3</td><td>8.800 RSD<button class="addbtn" type="button" data-add="ku-15-3" data-name="Kutija za uspomene 30×30×15, varijanta 3" data-price="8800" data-img="img/DdbDn6IAFeU.jpg" aria-label="Dodaj u korpu: Kutija za uspomene 30×30×15, varijanta 3">Dodaj</button></td></tr><tr><td>Kutija za uspomene 30×30×30, aplikacija + ime</td><td>9.600 RSD<button class="addbtn" type="button" data-add="ku-30-a" data-name="Kutija za uspomene 30×30×30, aplikacija + ime" data-price="9600" data-img="img/DbsWWvtADEJ.jpg" aria-label="Dodaj u korpu: Kutija za uspomene 30×30×30, aplikacija + ime">Dodaj</button></td></tr><tr><td>Kutija za uspomene 30×30×30, ručno oslikana</td><td>10.600 RSD<button class="addbtn" type="button" data-add="ku-30-r" data-name="Kutija za uspomene 30×30×30, ručno oslikana" data-price="10600" data-img="img/DbsWWvtADEJ.jpg" aria-label="Dodaj u korpu: Kutija za uspomene 30×30×30, ručno oslikana">Dodaj</button></td></tr><tr><td>Kutija za uspomene 40×30×15</td><td>9.600 RSD<button class="addbtn" type="button" data-add="ku-40" data-name="Kutija za uspomene 40×30×15" data-price="9600" data-img="img/DdEk88AgIuA.jpg" aria-label="Dodaj u korpu: Kutija za uspomene 40×30×15">Dodaj</button></td></tr><tr><td>Gajbica sa imenom 33×28×15</td><td>6.800 RSD<button class="addbtn" type="button" data-add="gaj-ime" data-name="Gajbica sa imenom 33×28×15" data-price="6800" data-img="img/DZh8CRyDfmU.jpg" aria-label="Dodaj u korpu: Gajbica sa imenom 33×28×15">Dodaj</button></td></tr><tr><td>Gajbica sa aplikacijom 33×28×15</td><td>7.800 RSD<button class="addbtn" type="button" data-add="gaj-apl" data-name="Gajbica sa aplikacijom 33×28×15" data-price="7800" data-img="img/DbdlWmKjZgH.jpg" aria-label="Dodaj u korpu: Gajbica sa aplikacijom 33×28×15">Dodaj</button></td></tr></table></div><div class="pl"><h3>Kutije za igračke</h3><table><tr><td>Kutija SLONIĆ / KUCA / BAMBI / LIJA (izbor upišite u korpi)</td><td>9.600 RSD<button class="addbtn" type="button" data-add="kut-zivotinja" data-name="Kutija SLONIĆ / KUCA / BAMBI / LIJA (izbor upišite u korpi)" data-price="9600" data-img="img/Dc3wdhogM7P.jpg" aria-label="Dodaj u korpu: Kutija SLONIĆ / KUCA / BAMBI / LIJA (izbor upišite u korpi)">Dodaj</button></td></tr><tr><td>Kutija MEDA / PANDA</td><td>10.600 RSD<button class="addbtn" type="button" data-add="kut-meda" data-name="Kutija MEDA / PANDA" data-price="10600" data-img="img/Dc3wdhogM7P.jpg" aria-label="Dodaj u korpu: Kutija MEDA / PANDA">Dodaj</button></td></tr><tr><td>Kutija SWEETY 50×40</td><td>16.200 RSD<button class="addbtn" type="button" data-add="kut-sweety" data-name="Kutija SWEETY 50×40" data-price="16200" data-img="img/DbD5obcABLm.jpg" aria-label="Dodaj u korpu: Kutija SWEETY 50×40">Dodaj</button></td></tr><tr><td>Oslikana kutija 50×40</td><td>16.800 RSD<button class="addbtn" type="button" data-add="kut-osl-50x40" data-name="Oslikana kutija 50×40" data-price="16800" data-img="img/Dc3wdhogM7P.jpg" aria-label="Dodaj u korpu: Oslikana kutija 50×40">Dodaj</button></td></tr><tr><td>Oslikana kutija 40×35×40</td><td>15.200 RSD<button class="addbtn" type="button" data-add="kut-osl-40" data-name="Oslikana kutija 40×35×40" data-price="15200" data-img="img/Dc3wdhogM7P.jpg" aria-label="Dodaj u korpu: Oslikana kutija 40×35×40">Dodaj</button></td></tr><tr><td>Oslikana kutija 50×45×50</td><td>21.600 RSD<button class="addbtn" type="button" data-add="kut-osl-50" data-name="Oslikana kutija 50×45×50" data-price="21600" data-img="img/Dc3wdhogM7P.jpg" aria-label="Dodaj u korpu: Oslikana kutija 50×45×50">Dodaj</button></td></tr><tr><td>Oslikana kutija 60×50×55</td><td>25.600 RSD<button class="addbtn" type="button" data-add="kut-osl-60" data-name="Oslikana kutija 60×50×55" data-price="25600" data-img="img/Dc3wdhogM7P.jpg" aria-label="Dodaj u korpu: Oslikana kutija 60×50×55">Dodaj</button></td></tr></table></div><div class="pl"><h3>Nameštaj, slike, slova</h3><table><tr><td>Biblioteka velika 65×30×71</td><td>19.800 RSD<button class="addbtn" type="button" data-add="bib-v" data-name="Biblioteka velika 65×30×71" data-price="19800" data-img="img/DadREUsALjH.jpg" aria-label="Dodaj u korpu: Biblioteka velika 65×30×71">Dodaj</button></td></tr><tr><td>Biblioteka mala 60×42×30</td><td>15.800 RSD<button class="addbtn" type="button" data-add="bib-m" data-name="Biblioteka mala 60×42×30" data-price="15800" data-img="img/DadREUsALjH.jpg" aria-label="Dodaj u korpu: Biblioteka mala 60×42×30">Dodaj</button></td></tr><tr><td>Busić 70×40×40</td><td>15.800 RSD<button class="addbtn" type="button" data-add="busic" data-name="Busić 70×40×40" data-price="15800" data-img="img/DadREUsALjH.jpg" aria-label="Dodaj u korpu: Busić 70×40×40">Dodaj</button></td></tr><tr><td>Kolica za igračke</td><td>9.800 RSD<button class="addbtn" type="button" data-add="kolica" data-name="Kolica za igračke" data-price="9800" data-img="img/DadREUsALjH.jpg" aria-label="Dodaj u korpu: Kolica za igračke">Dodaj</button></td></tr><tr><td>Slika na platnu oval 30×20</td><td>6.600 RSD<button class="addbtn" type="button" data-add="slika-oval-s" data-name="Slika na platnu oval 30×20" data-price="6600" data-img="img/DSvMVEegKSN.jpg" aria-label="Dodaj u korpu: Slika na platnu oval 30×20">Dodaj</button></td></tr><tr><td>Slika na platnu oval 40×30</td><td>8.600 RSD<button class="addbtn" type="button" data-add="slika-oval-l" data-name="Slika na platnu oval 40×30" data-price="8600" data-img="img/DSvMVEegKSN.jpg" aria-label="Dodaj u korpu: Slika na platnu oval 40×30">Dodaj</button></td></tr><tr><td>Slika na platnu krug 20 cm</td><td>6.600 RSD<button class="addbtn" type="button" data-add="slika-krug-s" data-name="Slika na platnu krug 20 cm" data-price="6600" data-img="img/DSvMVEegKSN.jpg" aria-label="Dodaj u korpu: Slika na platnu krug 20 cm">Dodaj</button></td></tr><tr><td>Slika na platnu krug 30 cm</td><td>8.600 RSD<button class="addbtn" type="button" data-add="slika-krug-l" data-name="Slika na platnu krug 30 cm" data-price="8600" data-img="img/DSvMVEegKSN.jpg" aria-label="Dodaj u korpu: Slika na platnu krug 30 cm">Dodaj</button></td></tr><tr><td>Slika SLOVO</td><td>3.400 RSD<button class="addbtn" type="button" data-add="slika-slovo" data-name="Slika SLOVO" data-price="3400" data-img="img/DbAb1Z3AIxq.jpg" aria-label="Dodaj u korpu: Slika SLOVO">Dodaj</button></td></tr><tr><td>Slika sa aplikacijom</td><td>4.600 RSD<button class="addbtn" type="button" data-add="slika-apl" data-name="Slika sa aplikacijom" data-price="4600" data-img="img/DbAb1Z3AIxq.jpg" aria-label="Dodaj u korpu: Slika sa aplikacijom">Dodaj</button></td></tr><tr><td>Zastavice 12 kom</td><td>3.600 RSD<button class="addbtn" type="button" data-add="zastavice" data-name="Zastavice 12 kom" data-price="3600" data-img="img/Da3JDSogG-B.jpg" aria-label="Dodaj u korpu: Zastavice 12 kom">Dodaj</button></td></tr><tr><td>Drvena kocka 7×7</td><td>850 RSD<button class="addbtn" type="button" data-add="kocka" data-name="Drvena kocka 7×7" data-price="850" data-img="img/Da3JDSogG-B.jpg" aria-label="Dodaj u korpu: Drvena kocka 7×7">Dodaj</button></td></tr><tr><td>Drveno slovo 26 cm</td><td>5.200 RSD<button class="addbtn" type="button" data-add="slovo" data-name="Drveno slovo 26 cm" data-price="5200" data-img="img/Da3JDSogG-B.jpg" aria-label="Dodaj u korpu: Drveno slovo 26 cm">Dodaj</button></td></tr></table></div></div>
 </div></section>
 
 <section class="block" id="utisci" style="padding-top:0"><div class="wrap">
  <div class="sec-head"><div><span class="eyebrow">Utisci</span><h2>Poruke koje <span class="script">greju</span></h2></div></div>
  <div class="revs"><div class="rev"><p>„Nikako da stignem da javim da smo oduuuuusevljeni kutijom, toliko je lepo oslikana i uopšte svaki detalj je savršen“</p><b>Jovana</b></div><div class="rev"><p>„Jos lepse nego sto sam ocekivala, ne mogu da vam opisem sreću mene a i mog deteta, usrećili ste nas mnogooo.“</p><b>Poruka kupca</b></div><div class="rev"><p>„Paket je stigao i preleeeepoooo je. Oduševili se i mama i beba“</p><b>Poruka kupca</b></div></div>
- <p class="note">Poruke kupaca iz highlight-a „Utisci“ na Instagram profilu, prenete doslovno.</p>
+ <p class="note">Poruke kupaca, prenete doslovno.</p>
 </div></section>
 
 <section class="block" style="padding-top:0"><div class="wrap"><div class="mosaic"><img src="img/DdEk88AgIuA.jpg" alt="" loading="lazy"><img src="img/DcMKB_OAOzF.jpg" alt="" loading="lazy"><img src="img/DbdlWmKjZgH.jpg" alt="" loading="lazy"><img src="img/DbAb1Z3AIxq.jpg" alt="" loading="lazy"><img src="img/DaQoNLTAEKI.jpg" alt="" loading="lazy"><img src="img/DZflh-1gNiF.jpg" alt="" loading="lazy"><img src="img/DaVf7VCgBJK.jpg" alt="" loading="lazy"><img src="img/DaD0TkHgNi5.jpg" alt="" loading="lazy"></div></div></section>
 </main><footer><div class="wrap"><span>© 2026 She Made creative studio · ručno pravljene i oslikane kutije i slike za dečije sobe</span><a href="https://www.instagram.com/shemade.creativestudio/" target="_blank" rel="noopener">Instagram @shemade.creativestudio</a></div></footer>
-<div class="toast" id="toast" role="status"></div>
-<script>document.getElementById('cartBtn').onclick=function(){location.href="kutija-za-uspomene.html#upit"};</script>
+<div class="toast" id="toast" role="status"></div><div class="cart-ov" id="cartOv"></div>
+<aside class="drawer" id="drawer" aria-label="Korpa" aria-hidden="true">
+ <div class="dr-head"><h2>Korpa</h2><button class="dr-x" id="drX" type="button" aria-label="Zatvori">&times;</button></div>
+ <div class="dr-body" id="drBody"></div>
+ <div class="dr-foot" id="drFoot"></div>
+</aside>
+<script>
+(function(){
+var KEY='shemade-cart',IGU='https://www.instagram.com/shemade.creativestudio/';
+var items=[],mode='cart',order=null;
+try{items=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){items=[]}
+if(!Array.isArray(items))items=[];
+function g(id){return document.getElementById(id)}
+function fmt(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' RSD'}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(items))}catch(e){}}
+function count(){return items.reduce(function(a,i){return a+i.qty},0)}
+function total(){return items.reduce(function(a,i){return a+i.qty*i.price},0)}
+function toast(t){var e=g('toast');if(!e)return;e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){e.classList.remove('show')},2600)}
+function open(){g('cartOv').classList.add('open');g('drawer').classList.add('open');g('drawer').setAttribute('aria-hidden','false');render()}
+function close(){g('cartOv').classList.remove('open');g('drawer').classList.remove('open');g('drawer').setAttribute('aria-hidden','true');if(mode!=='cart'&&(mode==='done'||!items.length)){mode='cart';order=null;render()}}
+function add(it){
+ var k=[it.id,(it.detail||''),(it.note||'')].join('|'),f=items.filter(function(x){return x.key===k})[0];
+ if(f)f.qty+=it.qty||1;else items.push({key:k,id:it.id,name:it.name,detail:it.detail||'',note:it.note||'',price:it.price,img:it.img||'',qty:it.qty||1});
+ save();mode='cart';render();toast('Dodato u korpu: '+it.name)
+}
+function line(i,x){
+ return '<div class="line">'+(x.img?'<img src="'+esc(x.img)+'" alt="">':'<div></div>')+
+ '<div><h4>'+esc(x.name)+'</h4>'+(x.detail?'<div class="d">'+esc(x.detail)+'</div>':'')+
+ '<div class="qty"><button type="button" data-a="dec" data-i="'+i+'" aria-label="Manje">&minus;</button><span>'+x.qty+'</span><button type="button" data-a="inc" data-i="'+i+'" aria-label="Više">+</button></div></div>'+
+ '<div><div class="lp">'+fmt(x.price*x.qty)+'</div><button class="rm" type="button" data-a="rm" data-i="'+i+'">Ukloni</button></div>'+
+ '<input class="note-in" data-i="'+i+'" value="'+esc(x.note)+'" maxlength="140" placeholder="Ime, boje, tekst ili želja za ovaj komad" aria-label="Personalizacija"></div>'
+}
+function help(){return '<p class="help">Pitanja? Pišite nam na Instagramu <a href="'+IGU+'" target="_blank" rel="noopener">@shemade.creativestudio</a></p>'}
+function inner(x){return x.qty+' × '+esc(x.name)+(x.detail||x.note?' <small>('+esc(x.detail)+(x.detail&&x.note?'; ':'')+esc(x.note)+')</small>':'')}
+function sumLine(x){return '<div>'+inner(x)+' · '+fmt(x.qty*x.price)+'</div>'}
+function render(){
+ var c=count(),b=g('cartCount');if(b)b.textContent=c;
+ var body=g('drBody'),foot=g('drFoot');if(!body)return;
+ var sc=document.querySelectorAll('.cart-n');for(var s=0;s<sc.length;s++)sc[s].textContent=c;
+ if(mode==='done'){
+  body.innerHTML='<div class="done"><div class="script" style="font-size:34px">She Made</div><h3>Hvala, porudžbina je primljena</h3><p>Broj porudžbine: <b>'+esc(order.no)+'</b></p><p>Potvrda je poslata na '+esc(order.email)+'.</p><div class="sum">'+order.lines+'<div style="margin-top:8px"><b>Ukupno proizvodi: '+fmt(order.total)+'</b><br>Plaćanje pouzećem, poštarina po tarifi pošte.</div></div><button class="btn btn-dark" id="doneBtn" type="button">Nastavi kupovinu</button></div>';
+  foot.innerHTML=help();g('doneBtn').onclick=close;return
+ }
+ if(!items.length){mode='cart';body.innerHTML='<div class="dr-empty">Korpa je prazna.<br>Izaberite proizvod i dodajte ga u korpu.</div>';foot.innerHTML=help();return}
+ if(mode==='checkout'){
+  body.innerHTML=items.map(function(x){return '<div style="display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:6px 0;border-bottom:1px dashed var(--line)"><span>'+inner(x)+'</span><b style="white-space:nowrap">'+fmt(x.qty*x.price)+'</b></div>'}).join('')+
+  '<form class="co" id="coForm" novalidate><label for="cName">Ime i prezime</label><input id="cName" autocomplete="name" required>'+
+  '<label for="cAddr">Adresa (ulica i broj)</label><input id="cAddr" autocomplete="street-address" required>'+
+  '<div class="f2"><div><label for="cCity">Grad</label><input id="cCity" autocomplete="address-level2" required></div><div><label for="cZip">Poštanski broj</label><input id="cZip" autocomplete="postal-code" inputmode="numeric"></div></div>'+
+  '<label for="cTel">Telefon</label><input id="cTel" type="tel" autocomplete="tel" required>'+
+  '<label for="cMail">E-mail</label><input id="cMail" type="email" autocomplete="email" required>'+
+  '<label for="cNote">Napomena / personalizacija</label><textarea id="cNote" rows="3" placeholder="Ime na poklopcu, boje, motiv, datum kada vam treba"></textarea>'+
+  '<div class="pay"><b>Plaćanje pouzećem</b><br>Plaćate pri preuzimanju paketa.</div><div class="err" id="cErr"></div></form>';
+  foot.innerHTML='<div class="tot"><span>Proizvodi</span><span>'+fmt(total())+'</span></div><div class="tot-note">Poštarina nije uračunata (oko 340–600 din, po tarifi pošte).</div><button class="btn btn-dark" id="placeBtn" type="button" style="width:100%">Potvrdi porudžbinu</button><button class="btn btn-ghost" id="backBtn" type="button" style="width:100%;margin-top:8px">Nazad na korpu</button>'+help();
+  g('backBtn').onclick=function(){mode='cart';render()};
+  g('placeBtn').onclick=place;return
+ }
+ body.innerHTML=items.map(function(x,i){return line(i,x)}).join('');
+ foot.innerHTML='<div class="tot"><span>Ukupno</span><span>'+fmt(total())+'</span></div><div class="tot-note">Poštarina nije uračunata (oko 340–600 din). Plaćanje pouzećem. Izrada 10–25 dana.</div><button class="btn btn-dark" id="coBtn" type="button" style="width:100%">Na plaćanje</button>'+help();
+ g('coBtn').onclick=function(){mode='checkout';render()}
+}
+function place(){
+ var v=function(id){return g(id).value.trim()},err=g('cErr');
+ var f={name:v('cName'),addr:v('cAddr'),city:v('cCity'),tel:v('cTel'),email:v('cMail')};
+ if(!f.name||!f.addr||!f.city||!f.tel||!f.email){err.textContent='Popunite ime, adresu, grad, telefon i e-mail.';return}
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email)){err.textContent='Unesite ispravnu e-mail adresu.';return}
+ if(f.tel.replace(/\D/g,'').length<6){err.textContent='Unesite ispravan broj telefona.';return}
+ var nt=v('cNote');
+ order={no:'SM-'+Date.now().toString(36).toUpperCase().slice(-6),email:f.email,total:total(),lines:items.map(sumLine).join('')+(nt?'<div>Napomena: '+esc(nt)+'</div>':'')};
+ items=[];save();mode='done';render()
+}
+document.addEventListener('click',function(e){
+ var t=e.target.closest?e.target.closest('[data-a]'):null;
+ if(t&&g('drawer').contains(t)){var i=+t.dataset.i,a=t.dataset.a;
+  if(a==='inc')items[i].qty++;else if(a==='dec'){items[i].qty--;if(items[i].qty<1)items.splice(i,1)}else if(a==='rm')items.splice(i,1);
+  save();render();return}
+ var ad=e.target.closest?e.target.closest('[data-add]'):null;
+ if(ad){add({id:ad.dataset.add,name:ad.dataset.name,detail:ad.dataset.detail||'',price:+ad.dataset.price,img:ad.dataset.img||''})}
+});
+document.addEventListener('input',function(e){if(e.target.classList&&e.target.classList.contains('note-in')){items[+e.target.dataset.i].note=e.target.value;save()}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+g('cartBtn').onclick=open;g('cartOv').onclick=close;g('drX').onclick=close;
+window.Cart={add:add,open:open};
+render();
+})();
+</script>
 </body></html>
